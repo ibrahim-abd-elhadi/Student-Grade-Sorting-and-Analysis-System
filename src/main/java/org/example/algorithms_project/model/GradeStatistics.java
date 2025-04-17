@@ -6,7 +6,14 @@ import java.util.List;
 
 public class GradeStatistics {
     
-    public static double mean(List<Student> students) {
+    public static int getTotalNumber(List<Student> students) {
+        if (students.isEmpty()) 
+            return 0;
+        else
+            return students.size();
+    }
+    
+    public static double getMean(List<Student> students) {
         if (students.isEmpty()) 
             return 0;
         double total = 0;
@@ -16,7 +23,8 @@ public class GradeStatistics {
         return total/students.size();
     }
     
-    public static double median(List<Student> students) {
+    
+    public static double getMedian(List<Student> students) {
         if (students.isEmpty()) 
             return 0;
         List<Double> grades = new ArrayList<>();
@@ -38,7 +46,7 @@ public class GradeStatistics {
         }
     }
     
-    public static double max(List<Student> students) {
+    public static double getMaxGrade(List<Student> students) {
         if (students.isEmpty()) 
             return 0;
         double max = Double.MIN_VALUE;
@@ -50,7 +58,7 @@ public class GradeStatistics {
         return max;
     }
      
-    public static double min(List<Student> students) {
+    public static double getMinGrade(List<Student> students) {
         if (students.isEmpty()) 
             return 0;
         double min = Double.MAX_VALUE;
@@ -62,9 +70,9 @@ public class GradeStatistics {
         return min;
     }
     
-    public static double std(List<Student> students) {
+    public static double getStandaredDeviation(List<Student> students) {
         if (students.isEmpty()) return 0;
-        double mean = mean(students);
+        double mean = getMean(students);
         double sum = 0;
         for (Student student : students) {
             double diff = student.getGrade() - mean;
@@ -74,8 +82,8 @@ public class GradeStatistics {
     }
         
         
-    public static double var(List<Student> students){
-            double std=std(students);
+    public static double getVariance(List<Student> students){
+            double std=getStandaredDeviation(students);
             return std*std;
     }
 }
