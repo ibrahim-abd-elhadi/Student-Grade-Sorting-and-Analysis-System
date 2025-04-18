@@ -6,13 +6,37 @@ import java.util.List;
 
 public class QuickSort {
 
-    // Public API: Sort students using specified comparator
+    private static long lastExecutionTime;
+    private static long lastMemoryUsage;
+
+    // Public API: Sort students using specified comparator and track metrics
     public static void sort(List<Student> students, Comparator<Student> comparator) {
-        if (students == null || students.size() <= 1) return;
+        long startTime = System.nanoTime();
+        Runtime runtime = Runtime.getRuntime();
+
+        // Attempt to minimize garbage collection interference
+        System.gc();
+        long initialMemory = runtime.totalMemory() - runtime.freeMemory();
+
+        if (students == null || students.size() <= 1) {
+            // No sorting needed, but still calculate metrics
+            System.gc();
+            long finalMemory = runtime.totalMemory() - runtime.freeMemory();
+            lastExecutionTime = System.nanoTime() - startTime;
+            lastMemoryUsage = finalMemory - initialMemory;
+            return;
+        }
+
         quickSort(students, 0, students.size() - 1, comparator);
+
+        // Calculate final metrics
+        System.gc();
+        long finalMemory = runtime.totalMemory() - runtime.freeMemory();
+        lastExecutionTime = System.nanoTime() - startTime;
+        lastMemoryUsage = finalMemory - initialMemory;
     }
 
-    // Recursive QuickSort implementation
+    // Recursive QuickSort implementation (unchanged)
     private static void quickSort(List<Student> students, int low, int high,
                                   Comparator<Student> comparator) {
         if (low < high) {
@@ -22,10 +46,9 @@ public class QuickSort {
         }
     }
 
-    // Randomized partition scheme to avoid worst-case performance
+    // Randomized partition scheme (unchanged)
     private static int partition(List<Student> students, int low, int high,
                                  Comparator<Student> comparator) {
-        // Random pivot selection
         int randomPivotIndex = low + (int) (Math.random() * (high - low + 1));
         swap(students, randomPivotIndex, high);
 
@@ -42,10 +65,31 @@ public class QuickSort {
         return i + 1;
     }
 
-    // Swap helper method
+    // Swap helper method (unchanged)
     private static void swap(List<Student> students, int i, int j) {
         Student temp = students.get(i);
         students.set(i, students.get(j));
         students.set(j, temp);
+    }
+
+    // Getter for execution time (nanoseconds)
+    public static long getLastExecutionTime() {
+        return lastExecutionTime;
+    }
+
+    // Getter for memory usage (bytes)
+    public static long getLastMemoryUsage() {
+        return lastMemoryUsage;
+    }
+
+
+    public static String getFormattedExecutionTime() {
+        return String.format("%d ns | %.3f ms",
+                lastExecutionTime, lastExecutionTime / 1_000_000.0);
+    }
+
+    public static String getFormattedMemoryUsage() {
+        return String.format("%d bytes | %.2f KB | %.2f MB",
+                lastMemoryUsage, lastMemoryUsage / 1024.0, lastMemoryUsage / (1024.0 * 1024.0));
     }
 }
