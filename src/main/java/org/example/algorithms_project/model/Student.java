@@ -10,7 +10,7 @@ public class Student {
     public Student(String name, double grade, Performance performance) {
         this.name = name;
         this.grade = grade;
-        this.performance = this.performance;
+        this.performance = performance;
     }
 
     // Getters
