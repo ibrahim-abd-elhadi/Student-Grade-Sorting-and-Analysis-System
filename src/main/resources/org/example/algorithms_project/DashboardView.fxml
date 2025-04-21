@@ -114,7 +114,7 @@
       </Text>
       <Text id="quickTime" fx:id="quickTime" fill="WHITE" fontSmoothingType="LCD" layoutX="658.0" layoutY="505.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="2 sec" wrappingWidth="72.0" />
       <Text id="radixTime" fx:id="radixTime" fill="WHITE" fontSmoothingType="LCD" layoutX="783.0" layoutY="505.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="3 sec" wrappingWidth="72.0" />
-      <Text id="mergeTime" fx:id="mergeTime" fill="WHITE" fontSmoothingType="LCD" layoutX="530.0" layoutY="506.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="1 sec" wrappingWidth="72.0" />
+      <Text id="mergeTime" fx:id="mergeTime" fill="WHITE" fontSmoothingType="LCD" layoutX="530.0" layoutY="506.0" lineSpacing="5.0" stroke="#952da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="1 sec" wrappingWidth="72.0" />
       <Text fill="WHITE" fontSmoothingType="LCD" layoutX="773.0" layoutY="549.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Memory Usage:" wrappingWidth="92.0" />
       <Text fill="WHITE" fontSmoothingType="LCD" layoutX="653.0" layoutY="549.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Memory Usage:" wrappingWidth="92.0" />
       <Text fill="WHITE" fontSmoothingType="LCD" layoutX="529.0" layoutY="549.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Memory Usage:" wrappingWidth="92.0" />
