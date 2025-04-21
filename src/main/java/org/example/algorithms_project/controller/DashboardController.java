@@ -72,7 +72,7 @@ public class DashboardController {
     private void downLoad(ActionEvent event) {
        FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV files", "*.csv"));
-        fileChooser.setTitle("Choose file path");
+        fileChooser.setTitle("Choose File Path");
         File file = fileChooser.showSaveDialog(new Stage());
         if (file != null) {
             CSVWriter.writeStudentsToCSV(file.getAbsolutePath(), sortedStudents);
@@ -80,7 +80,7 @@ public class DashboardController {
         }
     }
 
-    // Setup the dashboard with sorting result and statistics
+    
     public void setupDashboard(SortResult sortResult, GradeStatistics stats) {
         this.sortedStudents = sortResult.getQuickSortedList();
 
