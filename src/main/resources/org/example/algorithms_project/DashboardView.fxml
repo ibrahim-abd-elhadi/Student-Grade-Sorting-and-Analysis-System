@@ -61,7 +61,7 @@
       <Text fill="#194979" fontSmoothingType="LCD" layoutX="48.0" layoutY="405.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Standard Deviation:-" wrappingWidth="111.73675537109375" />
       <Text fill="#194979" fontSmoothingType="LCD" layoutX="48.0" layoutY="435.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Grade Variance:" wrappingWidth="101.33673095703125" />
       <Text fx:id="numOfStud" layoutX="169.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100" wrappingWidth="48.53674316406227" />
-      <Text id="maxGrade" fx:id="maxGrade" layoutX="169.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="98" wrappingWidth="48.53674316406227" />
+      <Text id="maxGrade" fx:id="maxGrade" layoutX="169.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="97" wrappingWidth="48.53674316406227" />
       <Text id="minGrade" fx:id="minGrade" layoutX="169.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="30" wrappingWidth="48.53674316406227" />
       <Text id="median" fx:id="median" layoutX="169.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="82" wrappingWidth="48.53674316406227" />
       <Text id="standardDev" fx:id="stand" layoutX="169.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text=".8" wrappingWidth="48.53674316406227" />
@@ -143,12 +143,12 @@
        </ScatterChart>
       <ImageView fitHeight="118.0" fitWidth="162.0" layoutX="230.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@image1.png" />
+            <Image url="@images/image1.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="59.0" fitWidth="63.0" layoutX="104.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@statisticsIm.png" />
+            <Image url="@images/statisticsIm.png" />
          </image>
       </ImageView>
       <Button fx:id="down" layoutX="86.0" layoutY="587.0" mnemonicParsing="false" onAction="#downLoad" text="DownLoad" />
