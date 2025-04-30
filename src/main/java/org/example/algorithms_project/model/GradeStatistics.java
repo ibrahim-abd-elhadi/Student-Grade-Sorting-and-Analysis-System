@@ -2,7 +2,9 @@ package org.example.algorithms_project.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GradeStatistics {
     
@@ -23,7 +25,28 @@ public class GradeStatistics {
         return total/students.size();
     }
     
-    
+     public static double getMode(List<Student> students) {
+        if (students.isEmpty()) 
+            return 0;
+        List<Double> grades = new ArrayList<>();
+        for (Student student : students) {
+            grades.add(student.getGrade());
+        }
+        Map<Double, Integer> frequencyMap = new HashMap<>();
+        for (Double grade : grades) {
+        frequencyMap.put(grade, frequencyMap.getOrDefault(grade, 0) + 1);
+        }
+        Double mode=null;
+        int maxcount=0;
+        for (Map.Entry<Double, Integer> entry : frequencyMap.entrySet()) {
+            if (entry.getValue() > maxcount) {
+                maxcount = entry.getValue();
+                mode = entry.getKey();
+            }
+        }
+        return mode;
+     }
+
     public static double getMedian(List<Student> students) {
         if (students.isEmpty()) 
             return 0;
@@ -79,8 +102,7 @@ public class GradeStatistics {
             sum += diff*diff;
         }
         return Math.sqrt(sum/(students.size()-1));
-    }
-        
+    } 
         
     public static double getVariance(List<Student> students){
             double std=getStandaredDeviation(students);
