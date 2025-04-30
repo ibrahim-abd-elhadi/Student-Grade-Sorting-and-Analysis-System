@@ -21,18 +21,20 @@ public class SortResult {
     private static long radixMemoryTime;
     
     public static void sortingProcess(File csvFile, Comparator<Student> comparator) throws IOException {
-        List<Student> original= CSVReader.readStudents(csvFile);
+        
+        List<Student> original= CSVReader.readStudents(csvFile); 
+        
         List<Student> quickList = new ArrayList<>(original);
         List<Student> mergeList = new ArrayList<>(original);
         List<Student> radixList = new ArrayList<>(original);
    
-        QuickSort.sort(quickList, comparator);    
+        QuickSort.sort(quickList, comparator);              //pass to quicksort
         quickMemoryTime=QuickSort.getLastMemoryUsage();
         quickSortTime= QuickSort.getLastExecutionTime();
         
-        quickSortedList= new ArrayList<>(quickList); // sorted list on dashboard
+        quickSortedList= new ArrayList<>(quickList);        // sorted list on dashboard
         
-        if(comparator==SortingManager.GRADE_COMPARATOR){
+        if(comparator==SortingManager.GRADE_COMPARATOR){    //pass to Radixsort
             RadixSort.sortByGrade(radixList);
             radixSortTime=RadixSort.getGradeSortTime();
             radixMemoryTime=RadixSort.getGradeSortMemory();
@@ -47,6 +49,10 @@ public class SortResult {
             radixSortTime=RadixSort.getPerformanceSortTime();
             radixMemoryTime=RadixSort.getPerformanceSortMemory();
         }
+        
+        MergeSort.sort(mergeList, comparator);                //pass to mergesort
+        mergeSortTime=MergeSort.getLastExecutionTime();
+        mergeMemoryTime=MergeSort.getLastMemoryUsage();
     }
 
     public List<Student> getQuickSortedList() {
