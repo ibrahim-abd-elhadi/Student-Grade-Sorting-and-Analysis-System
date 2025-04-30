@@ -1,43 +1,39 @@
 package org.example.algorithms_project.model;
 
+import javafx.beans.property.*;
+
 public class Student {
+    private final StringProperty name;
+    private final DoubleProperty grade;
+    private final StringProperty performance;
 
-    public enum Performance { EXCELLENT, GOOD, POOR }
-    private String name;
-    private double grade;
-    private Performance performance;
-
-    public Student(String name, double grade, Performance performance) {
-        this.name = name;
-        this.grade = grade;
-        this.performance = performance;
+    public Student(String name, double grade) {
+        this.name = new SimpleStringProperty(name);
+        this.grade = new SimpleDoubleProperty(grade);
+        this.performance = new SimpleStringProperty(calculatePerformance(grade).toString());
     }
 
-    // Getters
-    public String getName() {
-        return name;
-    }
+    public StringProperty nameProperty() { return name; }
+    public DoubleProperty gradeProperty() { return grade; }
+    public StringProperty performanceProperty() { return performance; }
 
-    public double getGrade() {
-        return grade;
-    }
+    public String getName() { return name.get(); }
+    public double getGrade() { return grade.get(); }
+    public Performance getPerformance() { return Performance.valueOf(performance.get()); }
 
-    public Performance getPerformance() {
-        return performance;
-    }
 
-    // Setters
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) { this.name.set(name); }
 
     public void setGrade(double grade) {
-        this.grade = grade;
+        this.grade.set(grade);
+        this.performance.set(calculatePerformance(grade).toString());
     }
 
-    public void setPerformance(Performance performance) {
-        this.performance = performance;
+    private Performance calculatePerformance(double grade) {
+        if (grade >= 85) return Performance.EXCELLENT;
+        if (grade >= 65) return Performance.GOOD;
+        return Performance.POOR;
     }
 
-
+    public enum Performance { EXCELLENT, GOOD, POOR }
 }

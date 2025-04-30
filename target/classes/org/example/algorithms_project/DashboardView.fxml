@@ -67,14 +67,15 @@
       <Text id="standardDev" fx:id="stand" layoutX="169.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text=".8" wrappingWidth="48.53674316406227" />
       <Text id="variance" fx:id="var" layoutX="169.0" layoutY="435.0" strokeType="OUTSIDE" strokeWidth="0.0" text=".75" wrappingWidth="48.53674316406227" />
       <Text id="mean" fx:id="mean" layoutX="169.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="84" wrappingWidth="48.53674316406227" />
-      <BarChart id="histogram" layoutX="258.0" layoutY="218.0" prefHeight="160.0" prefWidth="212.0">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
+      <BarChart fx:id="histogram" layoutX="258.0" layoutY="218.0" prefHeight="160.0" prefWidth="212.0">
+         <xAxis>
+            <CategoryAxis fx:id="xAxis" side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis fx:id="yAxis" side="LEFT" />
+         </yAxis>
       </BarChart>
+
       <TableView fx:id="table" layoutX="527.0" layoutY="53.0" prefHeight="250.0" prefWidth="342.0">
         <columns>
           <TableColumn id="nameCol" fx:id="name" prefWidth="119.199951171875" text="Name" />

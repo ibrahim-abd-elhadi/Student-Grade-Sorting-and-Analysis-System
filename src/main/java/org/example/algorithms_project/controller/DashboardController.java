@@ -5,10 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.XYChart;
-import javafx.scene.chart.ScatterChart;
-import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -43,8 +40,13 @@ public class DashboardController {
     @FXML private Button down;
 
     @FXML private ScatterChart<Number, Number> scatter;
-    @FXML private BarChart<String, Number> barChart;
+    @FXML private BarChart<String, Number> histogram;
 
+    @FXML
+    private CategoryAxis xAxis;
+
+    @FXML
+    private NumberAxis yAxis;
     @FXML private TableView<Student> table;
     @FXML private TableColumn<Student, String> name;
     @FXML private TableColumn<Student, Double> grade;
@@ -62,9 +64,9 @@ public class DashboardController {
 
         // Prepare charts to avoid FXML animation glitches
         scatter.getData().clear();
-        barChart.getData().clear();
+        histogram.getData().clear();
         scatter.setAnimated(false);
-        barChart.setAnimated(false);
+        histogram.setAnimated(false);
     }
 
     // Download button action
@@ -144,7 +146,7 @@ public class DashboardController {
         series.getData().add(new XYChart.Data<>("GOOD", good));
         series.getData().add(new XYChart.Data<>("POOR", poor));
 
-        barChart.getData().add(series);
+        histogram.getData().add(series);
     }
 
     // Populate the TableView with sorted students

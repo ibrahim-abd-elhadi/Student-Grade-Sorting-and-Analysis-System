@@ -1,6 +1,7 @@
 package org.example.algorithms_project.model.algorithms;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -19,7 +20,7 @@ public class SortResult {
     private static long mergeMemoryTime;
     private static long radixMemoryTime;
     
-    public static void sortingProcess(File csvFile, Comparator<Student> comparator){   
+    public static void sortingProcess(File csvFile, Comparator<Student> comparator) throws IOException {
         List<Student> original= CSVReader.readStudents(csvFile);
         List<Student> quickList = new ArrayList<>(original);
         List<Student> mergeList = new ArrayList<>(original);
