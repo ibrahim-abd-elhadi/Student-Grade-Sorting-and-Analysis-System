@@ -1,78 +1,102 @@
 package org.example.algorithms_project.controller;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.example.algorithms_project.model.GradeStatistics;
+import org.example.algorithms_project.model.Student;
+import org.example.algorithms_project.model.algorithms.SortResult;
+import org.example.algorithms_project.utils.CSVWriter;
+
+import javafx.application.Platform;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.*;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.ScatterChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
-import org.example.algorithms_project.model.Student;
-import org.example.algorithms_project.model.algorithms.SortResult;
-import org.example.algorithms_project.model.GradeStatistics;
-
-import java.util.List;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.example.algorithms_project.utils.CSVWriter;
 
 public class DashboardController {
 
-    // FXML Fields
-    @FXML private Text numOfStud;
-    @FXML private Text maxGrade;
-    @FXML private Text minGrade;
-    @FXML private Text mean;
-    @FXML private Text median;
-    @FXML private Text stand;
-    @FXML private Text var;
-
-    @FXML private Text quickMem;
-    @FXML private Text quickTime;
-    @FXML private Text mergeMem;
-    @FXML private Text mergeTime;
-    @FXML private Text radixMem;
-    @FXML private Text radixTime;
-
-    @FXML private Button down;
-
-    @FXML private ScatterChart<Number, Number> scatter;
-    @FXML private BarChart<String, Number> histogram;
+    @FXML
+    private BarChart<String, Number> barChart;
 
     @FXML
-    private CategoryAxis xAxis;
+    private Button down;
 
     @FXML
-    private NumberAxis yAxis;
-    @FXML private TableView<Student> table;
-    @FXML private TableColumn<Student, String> name;
-    @FXML private TableColumn<Student, Double> grade;
-    @FXML private TableColumn<Student, String> perfor;
+    private TableColumn<Student, Double> grade;
 
-    private List<Student> sortedStudents;
-
-    // Initialize method
     @FXML
-    private void initialize() {
-        // Set up TableView column bindings
-        name.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getName()));
-        grade.setCellValueFactory(cellData -> new javafx.beans.property.SimpleDoubleProperty(cellData.getValue().getGrade()).asObject());
-        perfor.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getPerformance().toString()));
+    private Text maxGrade;
 
-        // Prepare charts to avoid FXML animation glitches
-        scatter.getData().clear();
-        histogram.getData().clear();
-        scatter.setAnimated(false);
-        histogram.setAnimated(false);
-    }
-
-    // Download button action
     @FXML
-    private void downLoad(ActionEvent event) {
-       FileChooser fileChooser = new FileChooser();
+    private Text mean;
+
+    @FXML
+    private Text median;
+
+    @FXML
+    private Text mergeMem;
+
+    @FXML
+    private Text mergeTime;
+
+    @FXML
+    private Text minGrade;
+
+    @FXML
+    private TableColumn<Student, String> name;
+
+    @FXML
+    private Text numOfStud;
+
+    @FXML
+    private TableColumn<Student, String> perfor;
+
+    @FXML
+    private Text quickMem;
+
+    @FXML
+    private Text quickTime;
+
+    @FXML
+    private Text radixMem;
+
+    @FXML
+    private Text radixTime;
+
+    @FXML
+    private ScatterChart<Number, Number> scatter;
+
+    @FXML
+    private Text stand;
+
+    @FXML
+    private TableView<Student> table;
+
+    @FXML
+    private Text var;
+
+    @FXML
+    private Text mode;
+
+    List<Student> sortedStudents ;
+    @FXML
+    void downLoad(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV files", "*.csv"));
         fileChooser.setTitle("Choose file path");
         File file = fileChooser.showSaveDialog(new Stage());
@@ -81,77 +105,123 @@ public class DashboardController {
             System.out.println("file exported successfully to : " + file.getAbsolutePath());
         }
     }
+    public void setStatistics(){
 
-    // Setup the dashboard with sorting result and statistics
-    public void setupDashboard(SortResult sortResult, GradeStatistics stats) {
-        this.sortedStudents = sortResult.getQuickSortedList();
+        numOfStud.setText(String.valueOf(GradeStatistics.getTotalNumber(sortedStudents)));
+        maxGrade.setText(String.valueOf(GradeStatistics.getMaxGrade(sortedStudents)));
+        minGrade.setText(String.valueOf(GradeStatistics.getMinGrade(sortedStudents)));
+        mean.setText(String.format("%.2f", GradeStatistics.getMean(sortedStudents)));
+        median.setText(String.format("%.2f", GradeStatistics.getMedian(sortedStudents)));
+        stand.setText(String.format("%.2f", GradeStatistics.getStandaredDeviation(sortedStudents)));
+        var.setText(String.format("%.2f", GradeStatistics.getVariance(sortedStudents)));
+        mode.setText(String.format("%.2f", GradeStatistics.getMode(sortedStudents)));
+    }
+    public void setTime(){
+        quickMem.setText(String.valueOf(SortResult.getQuickMemoryTime()));
+        quickTime.setText(String.valueOf(SortResult.getQuickSortTime()));
+        mergeMem.setText(String.valueOf(SortResult.getMergeMemoryTime()));
+        mergeTime.setText(String.valueOf(SortResult.getMergeSortTime()));
+        radixMem.setText(String.valueOf(SortResult.getRadixMemoryTime()));
+        radixTime.setText(String.valueOf(SortResult.getRadixSortTime()));
+    }
+    
+   
+@FXML
+private void setupBarChart() {
+    // Clear previous data
+    barChart.getData().clear();
 
-        setStatistics(stats);
+    // Create a new series for the bar chart
+    XYChart.Series<String, Number> series = new XYChart.Series<>();
+    series.setName("Performance Distribution");
+
+    // Count the number of students per performance category
+    long excellent = sortedStudents.stream().filter(s -> s.getPerformance() == Student.Performance.EXCELLENT).count();
+    long good = sortedStudents.stream().filter(s -> s.getPerformance() == Student.Performance.GOOD).count();
+    long poor = sortedStudents.stream().filter(s -> s.getPerformance() == Student.Performance.POOR).count();
+
+    // Create Data
+    XYChart.Data<String, Number> excellentData = new XYChart.Data<>("EXCELLENT", excellent);
+    XYChart.Data<String, Number> goodData = new XYChart.Data<>("GOOD", good);
+    XYChart.Data<String, Number> poorData = new XYChart.Data<>("POOR", poor);
+
+    // Add data to series
+    series.getData().addAll(excellentData, goodData, poorData);
+    barChart.getData().add(series);
+
+    // Make columns thinner
+    barChart.setBarGap(5);
+    barChart.setCategoryGap(30);
+
+    // Wait until the nodes are added to the scene
+    Platform.runLater(() -> {
+        if (excellentData.getNode() != null)
+            excellentData.getNode().setStyle("-fx-bar-fill: #2953c7;"); // Blue
+
+        if (goodData.getNode() != null)
+            goodData.getNode().setStyle("-fx-bar-fill: #1c7d86;"); // Green
+
+        if (poorData.getNode() != null)
+            poorData.getNode().setStyle("-fx-bar-fill: #F44336;"); // Red
+    });
+}
+
+    
+        
+private void setupScatterChart() {
+    // Set axis labels
+    NumberAxis xAxis = (NumberAxis) scatter.getXAxis();
+    xAxis.setLabel("Student Index");
+
+    NumberAxis yAxis = (NumberAxis) scatter.getYAxis();
+    yAxis.setLabel("Grade");
+
+    // Prepare data series
+    XYChart.Series<Number, Number> series = new XYChart.Series<>();
+    series.setName("Student Grades");
+
+    for (int i = 0; i < sortedStudents.size(); i++) {
+        Student student = sortedStudents.get(i);
+        XYChart.Data<Number, Number> data = new XYChart.Data<>(i + 1, student.getGrade());
+        series.getData().add(data);
+    }
+
+    scatter.getData().add(series);
+
+    // Reduce dot size after nodes are rendered
+    Platform.runLater(() -> {
+        for (XYChart.Data<Number, Number> data : series.getData()) {
+            if (data.getNode() != null) {
+                data.getNode().setStyle("-fx-background-radius: .5px; -fx-padding: .5px;");
+            }
+        }
+    });
+}
+
+        private void setTable(){
+            name.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getName()));
+            grade.setCellValueFactory(cellData -> new javafx.beans.property.SimpleDoubleProperty(cellData.getValue().getGrade()).asObject());
+            perfor.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getPerformance().toString()));
+            setStudentList(sortedStudents);
+        }
+        public void setStudentList(List<Student> sorStudents){
+            ObservableList<Student > observableList=FXCollections.observableArrayList(sorStudents);
+            table.setItems(observableList);
+        }
+      
+      
+       
+    @FXML
+    public void initialize() {
+        
+      // sortedStudents=SortResult.getQuickSortedList;
+        SortResult sortResult = new SortResult();  
+        sortedStudents = sortResult.getQuickSortedList(); 
+        setStatistics();
+        setTime();
         setupScatterChart();
         setupBarChart();
-        populateTable();
-        setSortMetrics(sortResult);
+        setTable();
     }
 
-    // Set statistics data
-    private void setStatistics(GradeStatistics stats) {
-        numOfStud.setText(String.valueOf(stats.getTotalNumber(sortedStudents)));
-        maxGrade.setText(String.valueOf(stats.getMaxGrade(sortedStudents)));
-        minGrade.setText(String.valueOf(stats.getMinGrade(sortedStudents)));
-        mean.setText(String.format("%.2f", stats.getMean(sortedStudents)));
-        median.setText(String.format("%.2f", stats.getMedian(sortedStudents)));
-        stand.setText(String.format("%.2f", stats.getStandaredDeviation(sortedStudents)));
-        var.setText(String.format("%.2f", stats.getVariance(sortedStudents)));
-    }
-
-    // Set sorting metrics (memory/time for sorting algorithms)
-    private void setSortMetrics(SortResult sortResult) {
-        // Uncomment and implement once memory/time values are available
-        
-        quickMem.setText(String.valueOf(sortResult.getQuickMemoryTime()));
-        quickTime.setText(String.valueOf(sortResult.getQuickSortTime()));
-        mergeMem.setText(String.valueOf(sortResult.getMergeMemoryTime()));
-        mergeTime.setText(String.valueOf(sortResult.getMergeSortTime()));
-        radixMem.setText(String.valueOf(sortResult.getRadixMemoryTime()));
-        radixTime.setText(String.valueOf(sortResult.getRadixSortTime()));
-        
-    }
-
-    // Setup scatter chart with student performance
-    private void setupScatterChart() {
-        NumberAxis xAxis = (NumberAxis) scatter.getXAxis();
-        xAxis.setLabel("Grade");
-
-        NumberAxis yAxis = (NumberAxis) scatter.getYAxis();
-        yAxis.setLabel("Performance");
-
-        XYChart.Series<Number, Number> series = new XYChart.Series<>();
-        for (Student student : sortedStudents) {
-            int performanceY = student.getPerformance().ordinal(); // EXCELLENT=0, GOOD=1, POOR=2
-            series.getData().add(new XYChart.Data<>(student.getGrade(), performanceY));
-        }
-
-        scatter.getData().add(series);
-    }
-
-    // Setup bar chart to visualize performance distribution
-    private void setupBarChart() {
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-
-        long excellent = sortedStudents.stream().filter(s -> s.getPerformance() == Student.Performance.EXCELLENT).count();
-        long good = sortedStudents.stream().filter(s -> s.getPerformance() == Student.Performance.GOOD).count();
-        long poor = sortedStudents.stream().filter(s -> s.getPerformance() == Student.Performance.POOR).count();
-
-        series.getData().add(new XYChart.Data<>("EXCELLENT", excellent));
-        series.getData().add(new XYChart.Data<>("GOOD", good));
-        series.getData().add(new XYChart.Data<>("POOR", poor));
-
-        histogram.getData().add(series);
-    }
-
-    // Populate the TableView with sorted students
-    private void populateTable() {
-        ObservableList<Student> studentData = FXCollections.observableArrayList(sortedStudents);
-        table.setItems(studentData);
-    }
 }
