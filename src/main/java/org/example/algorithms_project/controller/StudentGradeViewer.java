@@ -14,11 +14,15 @@ import javafx.scene.text.*;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import javafx.stage.FileChooser;
 import org.example.algorithms_project.HelloApplication;
 import org.example.algorithms_project.model.Student;
+import org.example.algorithms_project.model.algorithms.SortingManager;
 import org.example.algorithms_project.utils.CSVReader;
+
+import static org.example.algorithms_project.model.algorithms.SortResult.sortingProcess;
 
 
 public class StudentGradeViewer {
@@ -45,6 +49,7 @@ public class StudentGradeViewer {
     private final Label criteriaLabel;
     private final Button applyButton;
     private final CriteriaType[] criteriaValues;
+    private File csvFile;
 
     public enum CriteriaType {
         NAME_ASCENDING("Name (A-Z)"),
@@ -198,6 +203,26 @@ public class StudentGradeViewer {
         studentTable.setPlaceholder(placeholder);
     }
 
+    private Comparator<Student> getComparatorForCriteria(CriteriaType criteria) {
+        switch (criteria) {
+            case NAME_ASCENDING:
+                return SortingManager.NAME_COMPARATOR;
+            case NAME_DESCENDING:
+                return SortingManager.NAME_COMPARATOR.reversed();
+            case GRADE_ASCENDING:
+                return SortingManager.GRADE_COMPARATOR;
+            case GRADE_DESCENDING:
+                return SortingManager.GRADE_COMPARATOR.reversed();
+            case PERFORMANCE_ASCENDING:
+                return SortingManager.PERFORMANCE_COMPARATOR;
+            case PERFORMANCE_DESCENDING:
+                return SortingManager.PERFORMANCE_COMPARATOR.reversed();
+            default:
+                return SortingManager.NAME_COMPARATOR; // Default case
+        }
+    }
+
+
     private void setupButtons() {
         String baseStyle =
                 "-fx-font-family: 'Segoe UI'; " +
@@ -289,24 +314,24 @@ public class StudentGradeViewer {
         return root;
     }
 
+
     private void setupEventHandlers() {
         importButton.setOnAction(event -> handleFileImport());
         sortButton.setOnAction(event -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/algorithms_project/DashboardView.fxml"));
                 Parent dashboardRoot = loader.load();
-
-                // Optionally pass data to DashboardController here
                 DashboardController controller = loader.getController();
-                // controller.initData(...); // if you need to pass any data
-
                 Scene dashboardScene = new Scene(dashboardRoot);
                 primaryStage.setScene(dashboardScene);
                 primaryStage.setTitle("Dashboard");
 
+                CriteriaType selectedCriteria = getSelectedCriteria();
+                Comparator<Student> comparator = getComparatorForCriteria(selectedCriteria);
+                sortingProcess(csvFile, comparator);
+
             } catch (IOException e) {
                 e.printStackTrace();
-                // Optional: show alert to user
             }
         });
 
