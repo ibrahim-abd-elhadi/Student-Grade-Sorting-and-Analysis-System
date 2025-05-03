@@ -12,18 +12,20 @@ public class SortResult {
     
     private static List<Student> quickSortedList; // sorted list on dashboard
     
-    private static long quickSortTime;
-    private static long mergeSortTime;
-    private static long radixSortTime;
+    private static double quickSortTime;
+    private static double mergeSortTime;
+    private static double radixSortTime;
     
     private static long quickMemoryTime;
     private static long mergeMemoryTime;
     private static long radixMemoryTime;
     
     public static void sortingProcess(File csvFile, Comparator<Student> comparator) throws IOException {
-        
-        List<Student> original= CSVReader.readStudents(csvFile); 
-        
+
+        if (csvFile == null) {
+            throw new IllegalArgumentException("No CSV file selected!");
+        }
+        List<Student> original= CSVReader.readStudents(csvFile);
         List<Student> quickList = new ArrayList<>(original);
         List<Student> mergeList = new ArrayList<>(original);
         List<Student> radixList = new ArrayList<>(original);
@@ -55,11 +57,11 @@ public class SortResult {
         mergeMemoryTime=MergeSort.getLastMemoryUsage();
     }
 
-    public List<Student> getQuickSortedList() {
+    public static List<Student> getQuickSortedList() {
         return quickSortedList;
     }
     
-    public static long getQuickSortTime() {
+    public static double getQuickSortTime() {
         return quickSortTime;
     }
 
@@ -71,7 +73,7 @@ public class SortResult {
         return mergeMemoryTime;
     }
     
-    public static long getMergeSortTime() {
+    public static double getMergeSortTime() {
         return mergeSortTime;
     }
 
@@ -79,7 +81,8 @@ public class SortResult {
         return radixMemoryTime;
     }
     
-    public static long getRadixSortTime() {
+    public static double getRadixSortTime() {
         return radixSortTime;
     }
+
 }

@@ -14,7 +14,7 @@ public class SortingManager {
 
     // Sort by performance (Best to Worst)
     public static final Comparator<Student> PERFORMANCE_COMPARATOR =
-            Comparator.comparing(Student::getPerformance).reversed();
+            Comparator.comparing(Student::getGrade);
 
     public enum CriteriaType {
         NAME_ASCENDING("Name (A-Z)"),

@@ -4,6 +4,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.chart.*;
+import javafx.scene.text.Font;
 import org.example.algorithms_project.model.GradeStatistics;
 import org.example.algorithms_project.model.Student;
 import org.example.algorithms_project.model.algorithms.SortResult;
@@ -16,10 +20,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.ScatterChart;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -35,6 +35,8 @@ public class DashboardController {
 
     @FXML
     private Button down;
+    @FXML
+    private Button back;
 
     @FXML
     private TableColumn<Student, Double> grade;
@@ -95,6 +97,18 @@ public class DashboardController {
 
     List<Student> sortedStudents ;
     @FXML
+    void backtomain(ActionEvent event) {
+        Stage currentStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        // Create a new instance of StudentGradeViewer and set the scene
+        StudentGradeViewer studentView = new StudentGradeViewer(currentStage);
+        Scene mainScene = studentView.createStudentScene();
+
+        currentStage.setScene(mainScene);
+        currentStage.setTitle("Student Grade Viewer");
+    }
+
+    @FXML
     void downLoad(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV files", "*.csv"));
@@ -105,6 +119,7 @@ public class DashboardController {
             System.out.println("file exported successfully to : " + file.getAbsolutePath());
         }
     }
+
     public void setStatistics(){
 
         numOfStud.setText(String.valueOf(GradeStatistics.getTotalNumber(sortedStudents)));
@@ -124,47 +139,64 @@ public class DashboardController {
         radixMem.setText(String.valueOf(SortResult.getRadixMemoryTime()));
         radixTime.setText(String.valueOf(SortResult.getRadixSortTime()));
     }
-    
-   
-@FXML
-private void setupBarChart() {
-    // Clear previous data
-    barChart.getData().clear();
 
-    // Create a new series for the bar chart
-    XYChart.Series<String, Number> series = new XYChart.Series<>();
-    series.setName("Performance Distribution");
 
-    // Count the number of students per performance category
-    long excellent = sortedStudents.stream().filter(s -> s.getPerformance() == Student.Performance.EXCELLENT).count();
-    long good = sortedStudents.stream().filter(s -> s.getPerformance() == Student.Performance.GOOD).count();
-    long poor = sortedStudents.stream().filter(s -> s.getPerformance() == Student.Performance.POOR).count();
+    @FXML
+    private void setupBarChart() {
+        barChart.getData().clear();
 
-    // Create Data
-    XYChart.Data<String, Number> excellentData = new XYChart.Data<>("EXCELLENT", excellent);
-    XYChart.Data<String, Number> goodData = new XYChart.Data<>("GOOD", good);
-    XYChart.Data<String, Number> poorData = new XYChart.Data<>("POOR", poor);
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Grade Distribution");
 
-    // Add data to series
-    series.getData().addAll(excellentData, goodData, poorData);
-    barChart.getData().add(series);
+        // Create 20 bins for 5-point intervals (0-5, 5-10, ..., 95-100)
+        int[] gradeBins = new int[20];
 
-    // Make columns thinner
-    barChart.setBarGap(5);
-    barChart.setCategoryGap(30);
+        for (Student s : sortedStudents) {
+            int grade = (int) s.getGrade();
+            int binIndex = Math.min(grade / 5, 19); // Handle 100 as last bin
+            gradeBins[binIndex]++;
+        }
 
-    // Wait until the nodes are added to the scene
-    Platform.runLater(() -> {
-        if (excellentData.getNode() != null)
-            excellentData.getNode().setStyle("-fx-bar-fill: #2953c7;"); // Blue
+        // Create data points with proper range labels
+        for (int i = 0; i < gradeBins.length; i++) {
+            int lowerBound = i * 5;
+            int upperBound = (i + 1) * 5;
+            String rangeLabel = (i == 19) ? "95-100" :
+                    String.format("%d-%d", lowerBound, upperBound);
+            series.getData().add(new XYChart.Data<>(rangeLabel, gradeBins[i]));
+        }
 
-        if (goodData.getNode() != null)
-            goodData.getNode().setStyle("-fx-bar-fill: #1c7d86;"); // Green
+        // Configure chart appearance
+        barChart.getData().add(series);
+        barChart.setBarGap(0);       // Remove space between bars
+        barChart.setCategoryGap(0);  // Remove space between categories
 
-        if (poorData.getNode() != null)
-            poorData.getNode().setStyle("-fx-bar-fill: #F44336;"); // Red
-    });
-}
+        // CSS Styling
+        barChart.setStyle("-fx-category-gap: 0; -fx-bar-gap: 0;");
+
+        Platform.runLater(() -> {
+            // Apply uniform styling and width
+            for (XYChart.Data<String, Number> data : series.getData()) {
+                Node bar = data.getNode();
+                if (bar != null) {
+                    bar.setStyle("-fx-bar-fill: #2953c7;"
+                            + "-fx-background-radius: 0 0 0 0;" +"-fx-bar-width: 20px;\n" +
+                            "    -fx-background-radius: 0;"); // Square edges
+                }
+            }
+
+            barChart.widthProperty().addListener((obs, oldVal, newVal) -> {
+                double barWidth = newVal.doubleValue() / gradeBins.length - 2;
+                barChart.lookupAll(".chart-bar").forEach(node ->
+                        node.setStyle("-fx-max-width: " + barWidth + "px;"));
+            });
+
+            // Configure axis labels
+            CategoryAxis xAxis = (CategoryAxis) barChart.getXAxis();
+            xAxis.setTickLabelRotation(-45);  // Diagonal labels
+            xAxis.setTickLabelFont(Font.font(8)); // Smaller font
+        });
+    }
 
     
         
@@ -213,10 +245,12 @@ private void setupScatterChart() {
        
     @FXML
     public void initialize() {
-        
-      // sortedStudents=SortResult.getQuickSortedList;
-        SortResult sortResult = new SortResult();  
-        sortedStudents = sortResult.getQuickSortedList(); 
+
+        sortedStudents = SortResult.getQuickSortedList();
+        if (sortedStudents == null) {
+            sortedStudents = new ArrayList<>();
+        }
+
         setStatistics();
         setTime();
         setupScatterChart();

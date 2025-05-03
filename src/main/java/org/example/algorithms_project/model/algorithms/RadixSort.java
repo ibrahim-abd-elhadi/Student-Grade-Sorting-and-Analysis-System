@@ -13,9 +13,9 @@ import java.util.*;
 
 public class RadixSort {
 
-    private static long gradeSortTime; 
-    private static long nameSortTime;  
-    private static long performanceSortTime;
+    private static double gradeSortTime;
+    private static double nameSortTime;
+    private static double performanceSortTime;
     
     private static long gradeSortMemory; 
     private static long nameSortMemory;  
@@ -76,8 +76,8 @@ public class RadixSort {
             performanceMap.getOrDefault(s.getPerformance(), -1)
         ));
 
-        long endTime = System.nanoTime(); 
-        long endMemory = getMemoryUsage(); 
+        double endTime = System.nanoTime();
+        long endMemory = getMemoryUsage();
 
         performanceSortTime = endTime - startTime;
         performanceSortMemory = endMemory - startMemory;
@@ -154,16 +154,16 @@ private static int getMaxScaledGrade(List<Student> students) {
         return runtime.totalMemory() - runtime.freeMemory();
     }
 
-    public static long getGradeSortTime() {
-        return gradeSortTime;
+    public static double getGradeSortTime() {
+        return gradeSortTime/1000000000;
     }
 
-    public static long getNameSortTime() {
-        return nameSortTime;
+    public static double getNameSortTime() {
+        return nameSortTime/1000000000;
     }
 
-    public static long getPerformanceSortTime() {
-        return performanceSortTime;
+    public static double getPerformanceSortTime() {
+        return performanceSortTime/1000000000;
     }
 
     public static long getGradeSortMemory() {

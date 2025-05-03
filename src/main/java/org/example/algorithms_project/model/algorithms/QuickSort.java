@@ -6,7 +6,7 @@ import java.util.List;
 
 public class QuickSort {
 
-    private static long lastExecutionTime;
+    private static double lastExecutionTime;
     private static long lastMemoryUsage;
 
     // Public API: Sort students using specified comparator and track metrics
@@ -23,7 +23,7 @@ public class QuickSort {
             System.gc();
             long finalMemory = runtime.totalMemory() - runtime.freeMemory();
             lastExecutionTime = System.nanoTime() - startTime;
-            lastMemoryUsage = finalMemory - initialMemory;
+            lastMemoryUsage = Math.max(0, finalMemory - initialMemory); // Prevent negative values
             return;
         }
 
@@ -33,7 +33,7 @@ public class QuickSort {
         System.gc();
         long finalMemory = runtime.totalMemory() - runtime.freeMemory();
         lastExecutionTime = System.nanoTime() - startTime;
-        lastMemoryUsage = finalMemory - initialMemory;
+        lastMemoryUsage = Math.max(0, finalMemory - initialMemory); // Ensure non-negative memory usage
     }
 
     // Recursive QuickSort implementation (unchanged)
@@ -73,8 +73,8 @@ public class QuickSort {
     }
 
     // Getter for execution time (nanoseconds)
-    public static long getLastExecutionTime() {
-        return lastExecutionTime;
+    public static double getLastExecutionTime() {
+        return lastExecutionTime/1000000000;
     }
 
     // Getter for memory usage (bytes)
@@ -82,10 +82,9 @@ public class QuickSort {
         return lastMemoryUsage;
     }
 
-
     public static String getFormattedExecutionTime() {
         return String.format("%d ns | %.3f ms",
-                lastExecutionTime, lastExecutionTime / 1_000_000.0);
+                (long) lastExecutionTime, lastExecutionTime / 1_000_000.0);
     }
 
     public static String getFormattedMemoryUsage() {

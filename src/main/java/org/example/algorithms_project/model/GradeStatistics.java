@@ -16,7 +16,7 @@ public class GradeStatistics {
     }
     
     public static double getMean(List<Student> students) {
-        if (students.isEmpty()) 
+        if (students == null || students.isEmpty())
             return 0;
         double total = 0;
         for(Student student : students) {
@@ -26,7 +26,7 @@ public class GradeStatistics {
     }
     
      public static double getMode(List<Student> students) {
-        if (students.isEmpty()) 
+        if (students == null || students.isEmpty())
             return 0;
         List<Double> grades = new ArrayList<>();
         for (Student student : students) {
@@ -48,7 +48,7 @@ public class GradeStatistics {
      }
 
     public static double getMedian(List<Student> students) {
-        if (students.isEmpty()) 
+        if (students == null || students.isEmpty())
             return 0;
         List<Double> grades = new ArrayList<>();
         for (Student student : students) {
@@ -70,7 +70,7 @@ public class GradeStatistics {
     }
     
     public static double getMaxGrade(List<Student> students) {
-        if (students.isEmpty()) 
+        if (students == null || students.isEmpty())
             return 0;
         double max = Double.MIN_VALUE;
         for (Student student : students) {
@@ -82,7 +82,7 @@ public class GradeStatistics {
     }
      
     public static double getMinGrade(List<Student> students) {
-        if (students.isEmpty()) 
+        if (students == null || students.isEmpty())
             return 0;
         double min = Double.MAX_VALUE;
         for (Student student : students) {
@@ -94,7 +94,7 @@ public class GradeStatistics {
     }
     
     public static double getStandaredDeviation(List<Student> students) {
-        if (students.isEmpty()) return 0;
+        if (students == null || students.isEmpty()) return 0;
         double mean = getMean(students);
         double sum = 0;
         for (Student student : students) {

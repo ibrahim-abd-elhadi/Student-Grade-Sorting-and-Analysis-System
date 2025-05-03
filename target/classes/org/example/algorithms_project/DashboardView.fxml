@@ -10,148 +10,214 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="634.0" prefWidth="786.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.algorithms_project.controller.DashboardController">
+<AnchorPane prefHeight="634.0" prefWidth="786.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.algorithms_project.controller.DashboardController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e7edf4" height="665.0" stroke="#632727" strokeType="INSIDE" width="905.0" />
-      <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#204079" height="118.0" layoutX="23.0" layoutY="35.0" stroke="BLACK" strokeType="INSIDE" width="367.0" />
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="WHITE" height="327.0" layoutX="23.0" layoutY="170.0" stroke="WHITE" strokeType="INSIDE" width="204.0" />
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="WHITE" height="208.0" layoutX="251.0" layoutY="174.0" stroke="WHITE" strokeType="INSIDE" width="227.0" />
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="WHITE" height="216.0" layoutX="251.0" layoutY="417.0" stroke="WHITE" strokeType="INSIDE" width="227.0" />
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="WHITE" height="631.0" layoutX="497.0" layoutY="2.0" stroke="WHITE" strokeType="INSIDE" width="403.0" />
-      <Rectangle arcHeight="35.0" arcWidth="35.0" fill="#7e1d61" height="216.0" layoutX="525.0" layoutY="403.0" stroke="WHITE" strokeType="INSIDE" width="101.0" />
-      <Rectangle arcHeight="35.0" arcWidth="35.0" fill="#ac3683" height="216.0" layoutX="648.0" layoutY="403.0" stroke="WHITE" strokeType="INSIDE" width="101.0" />
-      <Rectangle arcHeight="35.0" arcWidth="35.0" fill="#a6518a" height="216.0" layoutX="769.0" layoutY="403.0" stroke="WHITE" strokeType="INSIDE" width="101.0" />
-      <Text fill="#2b567b" fontSmoothingType="LCD" layoutX="263.0" layoutY="201.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Histogram" wrappingWidth="101.33673095703125">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e7edf4" height="750.0" stroke="#632727" strokeType="INSIDE" width="1100.0" />
+      <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#204079" height="118.0" layoutX="23.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="636.0" />
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="WHITE" height="329.0" layoutX="32.0" layoutY="141.0" stroke="WHITE" strokeType="INSIDE" width="204.0" />
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="WHITE" height="298.0" layoutX="254.0" layoutY="146.0" stroke="WHITE" strokeType="INSIDE" width="410.0" />
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="WHITE" height="291.0" layoutX="254.0" layoutY="462.0" stroke="WHITE" strokeType="INSIDE" width="410.0" />
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="WHITE" height="737.0" layoutX="675.0" layoutY="2.0" stroke="WHITE" strokeType="INSIDE" width="426.0" />
+      <Rectangle arcHeight="35.0" arcWidth="35.0" fill="#093959" height="221.0" layoutX="825.0" layoutY="502.0" stroke="WHITE" strokeType="INSIDE" width="129.0" />
+      <Rectangle arcHeight="35.0" arcWidth="35.0" fill="#093959" height="221.0" layoutX="690.0" layoutY="502.0" stroke="WHITE" strokeType="INSIDE" width="129.0" />
+      <Rectangle arcHeight="35.0" arcWidth="35.0" fill="#093959" height="221.0" layoutX="958.0" layoutY="503.0" stroke="WHITE" strokeType="INSIDE" width="129.0" />
+      <Text fill="#2b567b" fontSmoothingType="LCD" layoutX="421.0" layoutY="166.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Histogram" wrappingWidth="101.33673095703125">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="36.0" layoutY="85.0" lineSpacing="5.0" stroke="WHITE" strokeLineCap="BUTT" strokeWidth="0.0" text="Student Dashboard" wrappingWidth="227.0">
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="52.0" layoutY="83.0" lineSpacing="5.0" stroke="WHITE" strokeLineCap="BUTT" strokeWidth="0.0" text="Student Dashboard" wrappingWidth="317.0">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Text>
-      <Text fill="#194979" fontSmoothingType="LCD" layoutX="48.0" layoutY="201.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Statistics" wrappingWidth="101.33673095703125">
+      <Text fill="#194979" fontSmoothingType="LCD" layoutX="48.0" layoutY="175.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Statistics" wrappingWidth="101.33673095703125">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Text>
-      <Text fill="#1a5994" fontSmoothingType="LCD" layoutX="263.0" layoutY="447.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Scatter Chart" wrappingWidth="101.33673095703125">
+      <Text fill="#1a5994" fontSmoothingType="LCD" layoutX="405.0" layoutY="487.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Scatter Chart" wrappingWidth="101.33673095703125">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <Text fill="#154a7b" fontSmoothingType="LCD" layoutX="524.0" layoutY="32.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Student Records 🎓" wrappingWidth="144.5367431640625">
+      <Text fill="#154a7b" fontSmoothingType="LCD" layoutX="807.0" layoutY="36.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Student Records 🎓" wrappingWidth="214.53680419921875">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#a14c73" height="40.0" layoutX="535.0" layoutY="413.0" stroke="#463956" strokeType="INSIDE" width="80.0" />
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#c757ad" height="40.0" layoutX="658.0" layoutY="414.0" stroke="#632929" strokeType="INSIDE" width="80.0" />
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#d995cd" height="40.0" layoutX="779.0" layoutY="414.0" stroke="#8c4d9c" strokeType="INSIDE" width="80.0" />
-      <Text fill="#215f99" fontSmoothingType="LCD" layoutX="48.0" layoutY="255.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Total Students:" wrappingWidth="128.5367431640625" />
-      <Text fill="#194979" fontSmoothingType="LCD" layoutX="48.0" layoutY="285.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Highest Grade:" wrappingWidth="101.33673095703125" />
-      <Text fill="#194979" fontSmoothingType="LCD" layoutX="48.0" layoutY="315.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Lowest Grade:" wrappingWidth="101.33673095703125" />
-      <Text fill="#194979" fontSmoothingType="LCD" layoutX="48.0" layoutY="345.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Average Grade:" wrappingWidth="101.33673095703125" />
-      <Text fill="#194979" fontSmoothingType="LCD" layoutX="48.0" layoutY="375.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Median Grade:" wrappingWidth="101.33673095703125" />
-      <Text fill="#194979" fontSmoothingType="LCD" layoutX="48.0" layoutY="405.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Standard Deviation:-" wrappingWidth="111.73675537109375" />
-      <Text fill="#194979" fontSmoothingType="LCD" layoutX="48.0" layoutY="435.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Grade Variance:" wrappingWidth="101.33673095703125" />
-      <Text fx:id="numOfStud" layoutX="169.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100" wrappingWidth="48.53674316406227" />
-      <Text id="maxGrade" fx:id="maxGrade" layoutX="169.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="97" wrappingWidth="48.53674316406227" />
-      <Text id="minGrade" fx:id="minGrade" layoutX="169.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="30" wrappingWidth="48.53674316406227" />
-      <Text id="median" fx:id="median" layoutX="169.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="82" wrappingWidth="48.53674316406227" />
-      <Text id="standardDev" fx:id="stand" layoutX="169.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text=".8" wrappingWidth="48.53674316406227" />
-      <Text id="variance" fx:id="var" layoutX="169.0" layoutY="435.0" strokeType="OUTSIDE" strokeWidth="0.0" text=".75" wrappingWidth="48.53674316406227" />
-      <Text id="mean" fx:id="mean" layoutX="169.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="84" wrappingWidth="48.53674316406227" />
-      <BarChart fx:id="histogram" layoutX="258.0" layoutY="218.0" prefHeight="160.0" prefWidth="212.0">
-         <xAxis>
-            <CategoryAxis fx:id="xAxis" side="BOTTOM" />
-         </xAxis>
-         <yAxis>
-            <NumberAxis fx:id="yAxis" side="LEFT" />
-         </yAxis>
-      </BarChart>
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#1d4869" height="40.0" layoutX="843.0" layoutY="509.0" stroke="WHITE" strokeType="INSIDE" width="89.0" />
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#1d4869" height="40.0" layoutX="712.0" layoutY="510.0" stroke="WHITE" strokeType="INSIDE" width="89.0" />
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#1d4869" height="40.0" layoutX="975.0" layoutY="511.0" stroke="WHITE" strokeType="INSIDE" width="89.0" />
+      <Text fill="#215f99" fontSmoothingType="LCD" layoutX="48.0" layoutY="213.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Total Students:" wrappingWidth="128.5367431640625">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font></Text>
+      <Text fill="#194979" fontSmoothingType="LCD" layoutX="48.0" layoutY="243.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Highest Grade:" wrappingWidth="101.33673095703125">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Text fill="#194979" fontSmoothingType="LCD" layoutX="48.0" layoutY="273.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Lowest Grade:" wrappingWidth="101.33673095703125">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Text fill="#194979" fontSmoothingType="LCD" layoutX="48.0" layoutY="300.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Average Grade:" wrappingWidth="135.33673095703125">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Text fill="#194979" fontSmoothingType="LCD" layoutX="48.0" layoutY="333.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Median Grade:" wrappingWidth="101.33673095703125">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Text fill="#194979" fontSmoothingType="LCD" layoutX="48.0" layoutY="365.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Standard Deviation:-" wrappingWidth="155.73675537109375">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Text fill="#194979" fontSmoothingType="LCD" layoutX="48.0" layoutY="395.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Grade Variance:" wrappingWidth="128.99999999999972">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Text fill="#194979" fontSmoothingType="LCD" layoutX="48.0" layoutY="423.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Mode:" wrappingWidth="101.33673095703125">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Text fx:id="numOfStud" layoutX="172.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100" textAlignment="CENTER" wrappingWidth="48.53674316406227" />
+      <Text id="maxGrade" fx:id="maxGrade" layoutX="172.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="97" textAlignment="CENTER" wrappingWidth="48.53674316406227" />
+      <Text id="minGrade" fx:id="minGrade" layoutX="172.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="30" textAlignment="CENTER" wrappingWidth="48.53674316406227" />
+      <Text id="median" fx:id="median" layoutX="172.0" layoutY="333.0" strokeType="OUTSIDE" strokeWidth="0.0" text="82" textAlignment="CENTER" wrappingWidth="48.53674316406227" />
+      <Text id="standardDev" fx:id="stand" layoutX="172.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text=".8" textAlignment="CENTER" wrappingWidth="48.53674316406227" />
+      <Text id="variance" fx:id="var" layoutX="172.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" text=".75" textAlignment="CENTER" wrappingWidth="48.53674316406227" />
+      <Text id="mean" fx:id="mean" layoutX="172.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="84" textAlignment="CENTER" wrappingWidth="48.53674316406227" />
+      <Text id="mode" fx:id="mode" layoutX="172.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="84" textAlignment="CENTER" wrappingWidth="48.53674316406227" />
 
-      <TableView fx:id="table" layoutX="527.0" layoutY="53.0" prefHeight="250.0" prefWidth="342.0">
+      <TableView fx:id="table" layoutX="693.0" layoutY="54.0" prefHeight="387.0" prefWidth="389.0">
         <columns>
-          <TableColumn id="nameCol" fx:id="name" prefWidth="119.199951171875" text="Name" />
-          <TableColumn id="gradeCol" fx:id="grade" prefWidth="89.60009765625" text="Grade" />
-            <TableColumn id="PerformanceCol" fx:id="perfor" prefWidth="133.60003662109375" text="Performance" />
+          <TableColumn id="nameCol" fx:id="name" prefWidth="131.99993896484375" text="Name" />
+          <TableColumn id="gradeCol" fx:id="grade" prefWidth="146.6666259765625" text="Grade" />
+            <TableColumn id="PerformanceCol" fx:id="perfor" prefWidth="110.00006103515625" text="Performance" />
         </columns>
       </TableView>
-      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="540.0" layoutY="436.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Merge Sort" wrappingWidth="72.0">
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="854.0" layoutY="534.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Merge Sort" wrappingWidth="72.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="663.0" layoutY="435.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Quick Sort" wrappingWidth="72.0">
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="723.0" layoutY="534.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Quick Sort" wrappingWidth="72.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="783.0" layoutY="438.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Radix Sort" wrappingWidth="72.0">
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="987.0" layoutY="535.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Radix Sort" wrappingWidth="72.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="653.0" layoutY="475.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Execution Time:" wrappingWidth="92.0">
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="691.0" layoutY="582.0" lineSpacing="2.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Execution Time:" textAlignment="CENTER" wrappingWidth="129.0">
          <font>
-            <Font size="13.0" />
+            <Font name="Calibri Bold Italic" size="18.0" />
          </font>
       </Text>
-      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="530.0" layoutY="473.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Execution Time:" wrappingWidth="101.0">
+      <Text id="quickTime" fx:id="quickTime" fill="WHITE" fontSmoothingType="LCD" layoutX="699.0" layoutY="620.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="2 sec" textAlignment="CENTER" wrappingWidth="111.3333740234375">
          <font>
-            <Font size="13.0" />
+            <Font size="18.0" />
+         </font></Text>
+      <Text id="radixTime" fx:id="radixTime" fill="WHITE" fontSmoothingType="LCD" layoutX="967.0" layoutY="620.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="3 sec" textAlignment="CENTER" wrappingWidth="111.3333740234375">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Text id="mergeTime" fx:id="mergeTime" fill="WHITE" fontSmoothingType="LCD" layoutX="837.0" layoutY="620.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="1 sec" textAlignment="CENTER" wrappingWidth="111.3333740234375">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="690.0" layoutY="660.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Memory Usage:" textAlignment="CENTER" wrappingWidth="129.0">
+         <font>
+            <Font name="Calibri Bold Italic" size="16.0" />
+         </font></Text>
+      <Text id="radixMemory" fx:id="radixMem" fill="WHITE" fontSmoothingType="LCD" layoutX="987.0" layoutY="695.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="1 k" textAlignment="CENTER" wrappingWidth="72.0">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Text id="quickMemory" fx:id="quickMem" fill="WHITE" fontSmoothingType="LCD" layoutX="720.0" layoutY="694.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="1k" textAlignment="CENTER" wrappingWidth="72.0">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Text id="mergeMemory" fx:id="mergeMem" fill="WHITE" fontSmoothingType="LCD" layoutX="857.0" layoutY="693.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="1 k" textAlignment="CENTER" wrappingWidth="72.0">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Text fill="#154a7b" layoutX="693.0" layoutY="476.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sorting Algorithm Comparison" textAlignment="CENTER" wrappingWidth="389.33333333333326">
+         <font>
+            <Font name="Arial Bold" size="24.0" />
          </font>
       </Text>
-      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="773.0" layoutY="475.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Execution Time:" wrappingWidth="92.0">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Text>
-      <Text id="quickTime" fx:id="quickTime" fill="WHITE" fontSmoothingType="LCD" layoutX="658.0" layoutY="505.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="2 sec" wrappingWidth="72.0" />
-      <Text id="radixTime" fx:id="radixTime" fill="WHITE" fontSmoothingType="LCD" layoutX="783.0" layoutY="505.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="3 sec" wrappingWidth="72.0" />
-      <Text id="mergeTime" fx:id="mergeTime" fill="WHITE" fontSmoothingType="LCD" layoutX="530.0" layoutY="506.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="1 sec" wrappingWidth="72.0" />
-      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="773.0" layoutY="549.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Memory Usage:" wrappingWidth="92.0" />
-      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="653.0" layoutY="549.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Memory Usage:" wrappingWidth="92.0" />
-      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="529.0" layoutY="549.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Memory Usage:" wrappingWidth="92.0" />
-      <Text id="radixMemory" fx:id="radixMem" fill="WHITE" fontSmoothingType="LCD" layoutX="779.0" layoutY="582.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="1 k" wrappingWidth="72.0" />
-      <Text id="quickMemory" fx:id="quickMem" fill="WHITE" fontSmoothingType="LCD" layoutX="658.0" layoutY="582.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="1k" wrappingWidth="72.0" />
-      <Text id="mergeMemory" fx:id="mergeMem" fill="WHITE" fontSmoothingType="LCD" layoutX="530.0" layoutY="583.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="1 k" wrappingWidth="72.0" />
-      <Text fill="#771a81" layoutX="524.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sorting Algorithm Comparison" wrappingWidth="247.2000732421874">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Text>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="WHITE" height="105.0" layoutX="23.0" layoutY="525.0" stroke="WHITE" strokeType="INSIDE" width="204.0" />
-      <Text fill="#273a79" layoutX="40.0" layoutY="551.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tap below to get the sorted file" wrappingWidth="170.98355102539062">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Text>
-      
-      <ScatterChart fx:id="scatter" layoutX="258.0" layoutY="464.0" prefHeight="160.0" prefWidth="212.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#093959" height="81.0" layoutX="34.0" layoutY="493.0" stroke="WHITE" strokeType="INSIDE" width="198.0" />
+
+      <ScatterChart fx:id="scatter" layoutX="261.0" layoutY="497.0" prefHeight="231.0" prefWidth="389.0">
         <xAxis>
-          <CategoryAxis side="BOTTOM" />
+          <NumberAxis side="BOTTOM" />
         </xAxis>
         <yAxis>
           <NumberAxis side="LEFT" />
         </yAxis>
        </ScatterChart>
-      <ImageView fitHeight="118.0" fitWidth="162.0" layoutX="230.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="118.0" fitWidth="162.0" layoutX="478.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/image1.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="59.0" fitWidth="63.0" layoutX="104.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="59.0" fitWidth="63.0" layoutX="104.0" layoutY="139.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/statisticsIm.png" />
          </image>
       </ImageView>
-      <Button fx:id="down" layoutX="86.0" layoutY="587.0" mnemonicParsing="false" onAction="#downLoad" text="DownLoad" />
+      <BarChart fx:id="barChart" layoutX="250.0" layoutY="161.0" prefHeight="284.0" prefWidth="399.0">
+         <xAxis>
+            <CategoryAxis label="Grade Ranges" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis label="Number of Students" />
+         </yAxis>
+      </BarChart>
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="827.0" layoutY="581.0" lineSpacing="2.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Execution Time:" textAlignment="CENTER" wrappingWidth="129.0">
+         <font>
+            <Font name="Calibri Bold Italic" size="18.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="958.0" layoutY="580.0" lineSpacing="2.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Execution Time:" textAlignment="CENTER" wrappingWidth="129.0">
+         <font>
+            <Font name="Calibri Bold Italic" size="18.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="828.0" layoutY="660.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Memory Usage:" textAlignment="CENTER" wrappingWidth="129.0">
+         <font>
+            <Font name="Calibri Bold Italic" size="16.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="958.0" layoutY="660.0" lineSpacing="5.0" stroke="#972da1" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeWidth="0.0" text="Memory Usage:" textAlignment="CENTER" wrappingWidth="129.0">
+         <font>
+            <Font name="Calibri Bold Italic" size="16.0" />
+         </font>
+      </Text>
+      <Text fill="#f6f6f6" layoutX="69.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DownLoad sorted list in CSV" textAlignment="CENTER" wrappingWidth="128.99999999999977">
+         <font>
+            <Font name="Bookman Old Style Bold" size="20.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#055370" height="81.0" layoutX="34.0" layoutY="608.0" stroke="WHITE" strokeType="INSIDE" width="198.0" />
+      <Text fill="#f6f6f6" layoutX="82.0" layoutY="654.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BACK" textAlignment="CENTER" wrappingWidth="128.99999999999977">
+         <font>
+            <Font name="Bookman Old Style Bold" size="20.0" />
+         </font>
+      </Text>
+      <Line endX="51.333335876464844" fill="#ebebeb" layoutX="42.0" layoutY="647.0" startX="22.16667938232422" stroke="WHITE" strokeWidth="15.0" />
+      <Polygon fill="WHITE" layoutX="70.0" layoutY="642.0" points="-27.333324432373047, 8.0, -7.62939453125E-6, 26.66668701171875, -7.62939453125E-6, -18.0" stroke="BLACK" strokeType="INSIDE" />
+      <Button fx:id="down" layoutX="34.0" layoutY="490.0" mnemonicParsing="false" onAction="#downLoad" opacity="0.0" prefHeight="88.0" prefWidth="198.0" textFill="#604e25" />
+      <Button fx:id="back" layoutX="31.0" layoutY="606.0" mnemonicParsing="false" onAction="#backtomain" opacity="0.0" prefHeight="81.0" prefWidth="204.0" />
    </children>
 </AnchorPane>

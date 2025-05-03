@@ -137,7 +137,7 @@ public class StudentGradeViewer {
 
         titleLabel.setFont(titleFont);
         titleLabel.setTextFill(PRIMARY_COLOR);
-
+        sortButton.setDisable(true);
         statusLabel.setFont(bodyFont);
         statusLabel.setTextFill(SUBTEXT_COLOR);
 
@@ -319,16 +319,20 @@ public class StudentGradeViewer {
         importButton.setOnAction(event -> handleFileImport());
         sortButton.setOnAction(event -> {
             try {
+                if (csvFile == null) {
+                    statusLabel.setText("Error: No file selected!");
+                    statusLabel.setTextFill(ACCENT_COLOR);
+                    return; // Exit early
+                }
+                CriteriaType selectedCriteria = getSelectedCriteria();
+                Comparator<Student> comparator = getComparatorForCriteria(selectedCriteria);
+                sortingProcess(csvFile, comparator);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/algorithms_project/DashboardView.fxml"));
                 Parent dashboardRoot = loader.load();
                 DashboardController controller = loader.getController();
                 Scene dashboardScene = new Scene(dashboardRoot);
                 primaryStage.setScene(dashboardScene);
                 primaryStage.setTitle("Dashboard");
-
-                CriteriaType selectedCriteria = getSelectedCriteria();
-                Comparator<Student> comparator = getComparatorForCriteria(selectedCriteria);
-                sortingProcess(csvFile, comparator);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -358,6 +362,7 @@ public class StudentGradeViewer {
         File selectedFile = fileChooser.showOpenDialog(null);
 
         if (selectedFile != null) {
+            this.csvFile = selectedFile;
             progressIndicator.setVisible(true);
             statusLabel.setText("Processing: " + selectedFile.getName());
 
@@ -369,6 +374,7 @@ public class StudentGradeViewer {
                         studentTable.getItems().setAll(students);
                         statusLabel.setText("Loaded " + students.size() + " records");
                         progressIndicator.setVisible(false);
+                        sortButton.setDisable(false);
                     });
 
                 } catch (Exception e) {
@@ -383,22 +389,6 @@ public class StudentGradeViewer {
         }
     }
 
-    private void showEmptySortPage() {
-        VBox emptyPage = new VBox(20);
-        emptyPage.setAlignment(Pos.CENTER);
-        emptyPage.setPadding(new Insets(40));
-        emptyPage.setStyle("-fx-background-color: linear-gradient(to bottom, #E6F0FF, #B3D1FF);");
-
-        Label message = new Label("This page is reserved for future sorting functionality");
-        message.setFont(Font.font("Segoe UI", 16));
-        message.setTextFill(SUBTEXT_COLOR);
-
-
-        emptyPage.getChildren().addAll(message);
-
-        Scene emptyScene = new Scene(emptyPage, 1100, 750);
-        primaryStage.setScene(emptyScene);
-    }
 
     private void showErrorDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

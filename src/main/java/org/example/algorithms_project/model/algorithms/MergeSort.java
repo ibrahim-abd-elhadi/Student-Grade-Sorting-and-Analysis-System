@@ -6,7 +6,7 @@ import java.util.List;
 
 public class MergeSort {
 
-    private static long lastExecutionTime;
+    private static double lastExecutionTime;
     private static long lastMemoryUsage;
 
     // Public API: Sort students using specified comparator and track metrics
@@ -20,7 +20,6 @@ public class MergeSort {
 
         if (students == null || students.size() <= 1) {
             // No sorting needed, but still calculate metrics
-            System.gc();
             long finalMemory = runtime.totalMemory() - runtime.freeMemory();
             lastExecutionTime = System.nanoTime() - startTime;
             lastMemoryUsage = finalMemory - initialMemory;
@@ -94,8 +93,8 @@ public class MergeSort {
     }
 
     // Getter for execution time (nanoseconds)
-    public static long getLastExecutionTime() {
-        return lastExecutionTime;
+    public static double getLastExecutionTime() {
+        return lastExecutionTime/1000000000;
     }
 
     // Getter for memory usage (bytes)
