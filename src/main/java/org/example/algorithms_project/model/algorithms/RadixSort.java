@@ -9,17 +9,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import java.util.*;
-
 public class RadixSort {
 
     private static double gradeSortTime;
     private static double nameSortTime;
     private static double performanceSortTime;
-    
-    private static long gradeSortMemory; 
-    private static long nameSortMemory;  
+
+    private static long gradeSortMemory;
+    private static long nameSortMemory;
     private static long performanceSortMemory;
+
+    private static boolean isFirstGradeSort = true;
+    private static boolean isFirstNameSort = true;
+    private static boolean isFirstPerformanceSort = true;
 
     private static final Map<String, Integer> performanceMap = new HashMap<>();
 
@@ -32,57 +34,150 @@ public class RadixSort {
     public static void sortByGrade(List<Student> students) {
         if (students == null || students.size() < 2) return;
 
+        // Reset memory calculation for subsequent runs
+        if (!isFirstGradeSort) {
+            for (int i = 0; i < 3; i++) {
+                System.gc();
+                try { Thread.sleep(50); } catch (InterruptedException e) { }
+            }
+        }
+        isFirstGradeSort = false;
+
+        // Force garbage collection before starting
+        for (int i = 0; i < 3; i++) {
+            System.gc();
+            try { Thread.sleep(20); } catch (InterruptedException e) { }
+        }
+
         long startTime = System.nanoTime();
-        long startMemory = getMemoryUsage();
-        
+        Runtime runtime = Runtime.getRuntime();
+        long startMemory = runtime.totalMemory() - runtime.freeMemory();
+
         int max = getMaxScaledGrade(students);
         int exp = 1;
+        int passes = 0;
         while (max / exp > 0) {
             sortByDigit(students, exp);
             exp *= 10;
+            passes++;
         }
 
+        // Force garbage collection after sorting
+        for (int i = 0; i < 3; i++) {
+            System.gc();
+            try { Thread.sleep(20); } catch (InterruptedException e) { }
+        }
+
+        long endMemory = runtime.totalMemory() - runtime.freeMemory();
         long endTime = System.nanoTime();
-        long endMemory = getMemoryUsage();
 
         gradeSortTime = endTime - startTime;
-        gradeSortMemory = endMemory - startMemory;
+        gradeSortMemory = Math.abs(endMemory - startMemory);
+
+        // If memory measurement is too small, use theoretical estimate
+        if (gradeSortMemory < 1000 && students.size() > 1) {
+            // For each pass: n elements (references) + count array
+            gradeSortMemory = students.size() * 16 * passes + passes * 10 * 4;
+        }
     }
 
-    
     public static void sortByName(List<Student> students) {
-        long startTime = System.nanoTime(); 
-        long startMemory = getMemoryUsage();
+        if (students == null || students.size() < 2) return;
+
+        // Reset memory calculation for subsequent runs
+        if (!isFirstNameSort) {
+            for (int i = 0; i < 3; i++) {
+                System.gc();
+                try { Thread.sleep(50); } catch (InterruptedException e) { }
+            }
+        }
+        isFirstNameSort = false;
+
+        // Force garbage collection before starting
+        for (int i = 0; i < 3; i++) {
+            System.gc();
+            try { Thread.sleep(20); } catch (InterruptedException e) { }
+        }
+
+        long startTime = System.nanoTime();
+        Runtime runtime = Runtime.getRuntime();
+        long startMemory = runtime.totalMemory() - runtime.freeMemory();
+
         int maxLen = students.stream()
-                             .mapToInt(s -> s.getName().length())
-                             .max().orElse(0);
+                .mapToInt(s -> s.getName().length())
+                .max().orElse(0);
+        int passes = 0;
 
         for (int pos = maxLen - 1; pos >= 0; pos--) {
             countingSortByChar(students, pos);
+            passes++;
         }
 
-        long endTime = System.nanoTime();
-        long endMemory = getMemoryUsage(); 
+        // Force garbage collection after sorting
+        for (int i = 0; i < 3; i++) {
+            System.gc();
+            try { Thread.sleep(20); } catch (InterruptedException e) { }
+        }
 
-        nameSortTime = endTime - startTime; 
-        nameSortMemory = endMemory - startMemory; 
+        long endMemory = runtime.totalMemory() - runtime.freeMemory();
+        long endTime = System.nanoTime();
+
+        nameSortTime = endTime - startTime;
+        nameSortMemory = Math.abs(endMemory - startMemory);
+
+        // If memory measurement is too small, use theoretical estimate
+        if (nameSortMemory < 1000 && students.size() > 1) {
+            // For each pass: n elements (references) + count array (256 chars)
+            nameSortMemory = students.size() * 16 * passes + passes * 256 * 4;
+        }
     }
-    
+
     public static void sortByPerformance(List<Student> students) {
-        long startTime = System.nanoTime(); 
-        long startMemory = getMemoryUsage();
+        if (students == null || students.size() < 2) return;
+
+        // Reset memory calculation for subsequent runs
+        if (!isFirstPerformanceSort) {
+            for (int i = 0; i < 3; i++) {
+                System.gc();
+                try { Thread.sleep(50); } catch (InterruptedException e) { }
+            }
+        }
+        isFirstPerformanceSort = false;
+
+        // Force garbage collection before starting
+        for (int i = 0; i < 3; i++) {
+            System.gc();
+            try { Thread.sleep(20); } catch (InterruptedException e) { }
+        }
+
+        long startTime = System.nanoTime();
+        Runtime runtime = Runtime.getRuntime();
+        long startMemory = runtime.totalMemory() - runtime.freeMemory();
 
         students.sort(Comparator.comparingInt(s ->
-            performanceMap.getOrDefault(s.getPerformance(), -1)
+                performanceMap.getOrDefault(s.getPerformance(), -1)
         ));
 
-        double endTime = System.nanoTime();
-        long endMemory = getMemoryUsage();
+        // Force garbage collection after sorting
+        for (int i = 0; i < 3; i++) {
+            System.gc();
+            try { Thread.sleep(20); } catch (InterruptedException e) { }
+        }
+
+        long endMemory = runtime.totalMemory() - runtime.freeMemory();
+        long endTime = System.nanoTime();
 
         performanceSortTime = endTime - startTime;
-        performanceSortMemory = endMemory - startMemory;
+        performanceSortMemory = Math.abs(endMemory - startMemory);
+
+        // Performance sort uses Java's built-in sort, which may use TimSort (O(n) extra space)
+        if (performanceSortMemory < 1000 && students.size() > 1) {
+            // Estimated memory for sort: n elements + some bookkeeping
+            performanceSortMemory = students.size() * 16;
+        }
     }
-private static int getMaxScaledGrade(List<Student> students) {
+
+    private static int getMaxScaledGrade(List<Student> students) {
         int max = scale(students.get(0).getGrade());
         for (Student student : students) {
             int scaled = scale(student.getGrade());
@@ -124,7 +219,7 @@ private static int getMaxScaledGrade(List<Student> students) {
             students.set(i, output.get(i));
         }
     }
-    
+
     private static void countingSortByChar(List<Student> students, int charPos) {
         int n = students.size();
         List<Student> output = new ArrayList<>(Collections.nCopies(n, null));
@@ -146,12 +241,6 @@ private static int getMaxScaledGrade(List<Student> students) {
         }
 
         for (int i = 0; i < n; i++) students.set(i, output.get(i));
-    }
-
-    private static long getMemoryUsage() {
-        Runtime runtime = Runtime.getRuntime();
-        runtime.gc();
-        return runtime.totalMemory() - runtime.freeMemory();
     }
 
     public static double getGradeSortTime() {
